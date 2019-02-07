@@ -1,3 +1,11 @@
+<?php
+    require "db.php";
+    // Check connection
+    // if(!R::testConnection()) {
+    //     die('No DB Connection');
+    // }
+    // echo 'OK!';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,18 +20,17 @@
 </head>
 <body>
 
-    <?php
-        require "db.php";
-        if(!R::testConnection()) {
-            die('No DB Connection');
-        }
-        echo 'OK!';
-    ?>
 
     <div class="wrapper">
+    <?php if( isset($_SESSION['logged_user']) ) : ?> 
+    Авторизован <br>
+    Привет, <?php echo $_SESSION['logged_user']->login; ?>!
+    <a style="display: block; text-align: center;" href="logout.php">Выйти</a>
+    <?php else : ?>
         <a href="/login.php">Авторизоваться</a>
         <a href="/signup.php">Зарегистрироваться</a>
     </div>
+    <?php endif; ?>
     
 </body>
 </html>
